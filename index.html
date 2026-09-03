@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1,user-scalable=no">
+
+<title>Love Certificate</title>
+
+<style>
+
+/* ==================================================
+        BASIC
+================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:18px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #fff8f4,
+            #eadbd3
+        );
+
+    font-family:
+        "Noto Sans Thai",
+        Arial,
+        sans-serif;
+
+    color:#4b3a34;
+}
+
+.app{
+    width:100%;
+    max-width:650px;
+    margin:auto;
+}
+
+
+/* ==================================================
+        HEADER
+================================================== */
+
+.header{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+.header h1{
+    margin:5px 0;
+    font-size:27px;
+}
+
+.header p{
+    margin:0;
+    color:#8d7469;
+    font-size:14px;
+}
+
+
+/* ==================================================
+        FORM
+================================================== */
+
+.panel{
+    background:rgba(255,255,255,.94);
+
+    border-radius:28px;
+
+    padding:22px;
+
+    box-shadow:
+        0 12px 35px #5a403020;
+}
+
+label{
+    display:block;
+
+    font-weight:bold;
+
+    margin:12px 0 7px;
+
+    font-size:16px;
+}
+
+input{
+    width:100%;
+    height:58px;
+
+    border:1px solid #d9ccc5;
+
+    border-radius:18px;
+
+    background:#fffdfb;
+
+    padding:0 18px;
+
+    font-size:17px;
+
+    outline:none;
+}
+
+input:focus{
+    border-color:#9a7565;
+}
+
+button{
+    width:100%;
+    height:60px;
+
+    border:0;
+
+    border-radius:18px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin-top:16px;
+
+    cursor:pointer;
+}
+
+.create{
+    background:#493a35;
+    color:white;
+}
+
+.clear{
+    background:#eee7e3;
+    color:#55443e;
+}
+
+
+/* ==================================================
+        RESULT
+================================================== */
+
+#result{
+    display:none;
+    margin-top:25px;
+}
+
+
+/* ==================================================
+        CERTIFICATE
+================================================== */
+
+.certificate{
+
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:0.707 / 1;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fffdf9 0%,
+            #faf3ed 70%,
+            #f2e6de 100%
+        );
+
+    border:8px solid #b08a78;
+
+    padding:8% 7%;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 15px 35px #4c332826;
+}
+
+
+/* ==================================================
+        INNER BORDER
+================================================== */
+
+.certificate::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:14px;
+
+    border:
+        1px solid #b08a78;
+
+    pointer-events:none;
+}
+
+.certificate::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:22px;
+
+    border:
+        1px solid #d5bfb3;
+
+    pointer-events:none;
+}
+
+
+/* ==================================================
+        DECORATION
+================================================== */
+
+.flower{
+
+    position:absolute;
+
+    font-size:30px;
+
+    color:#a27b68;
+
+    z-index:1;
+}
+
+.f1{
+    top:25px;
+    left:28px;
+}
+
+.f2{
+    top:25px;
+    right:28px;
+}
+
+.f3{
+    bottom:25px;
+    left:28px;
+}
+
+.f4{
+    bottom:25px;
+    right:28px;
+}
+
+
+/* ==================================================
+        BIRD
+================================================== */
+
+.bird{
+
+    position:relative;
+
+    text-align:center;
+
+    font-size:55px;
+
+    line-height:1;
+
+    margin-top:5%;
+
+    z-index:2;
+}
+
+
+/* ==================================================
+        TITLE
+================================================== */
+
+.english{
+
+    position:relative;
+
+    text-align:center;
+
+    margin-top:12px;
+
+    letter-spacing:6px;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:14px;
+
+    color:#866b5d;
+}
+
+
+.main-title{
+
+    position:relative;
+
+    text-align:center;
+
+    font-family:
+        Georgia,
+        "Noto Serif Thai",
+        serif;
+
+    font-size:
+        clamp(
+            28px,
+            7vw,
+            42px
+        );
+
+    margin-top:14px;
+
+    color:#493832;
+}
+
+
+/* ==================================================
+        LINE
+================================================== */
+
+.line{
+
+    width:110px;
+
+    height:2px;
+
+    background:#ad8b7b;
+
+    margin:18px auto;
+}
+
+
+/* ==================================================
+        NAMES
+================================================== */
+
+.names-title{
+
+    text-align:center;
+
+    color:#92796d;
+
+    font-size:14px;
+}
+
+
+/*
+    ชื่อซ้าย - หัวใจ - ชื่อขวา
+*/
+
+.names{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    width:100%;
+
+    margin-top:22px;
+
+    gap:8px;
+}
+
+
+/* ช่องชื่อ */
+
+.person{
+
+    width:44%;
+
+    min-width:0;
+
+    text-align:center;
+
+    padding:
+        12px 4px 8px;
+
+    border-bottom:
+        2px solid #aa8979;
+}
+
+
+/* ==================================================
+        ชื่อยาว
+================================================== */
+
+.person-name{
+
+    font-family:
+        Georgia,
+        "Noto Sans Thai",
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(
+            14px,
+            4.8vw,
+            30px
+        );
+
+    font-weight:bold;
+
+    color:#523b32;
+
+    /*
+        ชื่อยาวขึ้นบรรทัดได้
+    */
+
+    white-space:normal;
+
+    overflow:visible;
+
+    text-overflow:clip;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+    line-height:1.25;
+
+    min-height:38px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+}
+
+
+/* ==================================================
+        HEART
+================================================== */
+
+.heart{
+
+    flex:
+        0 0 35px;
+
+    text-align:center;
+
+    font-size:27px;
+
+    color:#a46e65;
+
+    padding-bottom:3px;
+}
+
+
+/* ==================================================
+        DESCRIPTION
+================================================== */
+
+.description{
+
+    position:relative;
+
+    text-align:center;
+
+    margin:
+        30px auto 0;
+
+    max-width:88%;
+
+    font-size:13px;
+
+    line-height:1.9;
+
+    color:#66534b;
+}
+
+
+/* ==================================================
+        DATE
+================================================== */
+
+.date{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    font-size:14px;
+
+    color:#826c61;
+}
+
+.date strong{
+
+    display:block;
+
+    font-family:
+        Georgia,
+        "Noto Serif Thai",
+        serif;
+
+    font-size:19px;
+
+    margin-top:5px;
+
+    color:#4e3a32;
+}
+
+
+/* ==================================================
+        FOOTER
+================================================== */
+
+.fake{
+
+    position:absolute;
+
+    bottom:16px;
+
+    left:0;
+
+    right:0;
+
+    text-align:center;
+
+    font-size:9px;
+
+    color:#a05f57;
+
+    z-index:3;
+}
+
+
+/* ==================================================
+        SAVE BUTTON
+================================================== */
+
+.save{
+
+    background:#986b5a;
+
+    color:white;
+
+    margin-top:18px;
+
+    box-shadow:
+        0 7px 20px #6d493833;
+}
+
+
+/* ==================================================
+        MOBILE
+================================================== */
+
+@media(max-width:430px){
+
+    body{
+        padding:12px;
+    }
+
+    .panel{
+        padding:18px;
+    }
+
+    .certificate{
+
+        border-width:6px;
+
+        padding-left:6%;
+        padding-right:6%;
+    }
+
+    .certificate::before{
+        inset:10px;
+    }
+
+    .certificate::after{
+        inset:16px;
+    }
+
+    .bird{
+        font-size:45px;
+    }
+
+    .english{
+
+        font-size:11px;
+
+        letter-spacing:4px;
+    }
+
+    .person{
+
+        width:44%;
+
+        padding-left:2px;
+        padding-right:2px;
+    }
+
+    .person-name{
+
+        font-size:
+            clamp(
+                12px,
+                4vw,
+                24px
+            );
+
+        line-height:1.2;
+    }
+
+    .heart{
+
+        flex:0 0 28px;
+
+        font-size:24px;
+    }
+
+    .description{
+
+        font-size:11px;
+
+        line-height:1.7;
+
+        margin-top:22px;
+    }
+
+    .fake{
+
+        font-size:8px;
+    }
+
+}
+
+
+/* ==================================================
+        VERY SMALL SCREEN
+================================================== */
+
+@media(max-width:350px){
+
+    .person-name{
+        font-size:12px;
+    }
+
+    .heart{
+
+        flex:0 0 24px;
+
+        font-size:21px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- ==================================================
+        HEADER
+================================================== -->
+
+<div class="header">
+
+    <h1>
+        🕊️ Love Certificate
+    </h1>
+
+    <p>
+        สร้างใบสมรสจำลองสำหรับคนพิเศษ
+    </p>
+
+</div>
+
+
+
+<!-- ==================================================
+        FORM
+================================================== -->
+
+<div class="panel">
+
+
+    <label>
+        ชื่อคนที่ 1
+    </label>
+
+    <input
+        id="person1"
+        type="text"
+        maxlength="150"
+        placeholder="ใส่ชื่อคนที่ 1">
+
+
+
+    <label>
+        ชื่อคนที่ 2
+    </label>
+
+    <input
+        id="person2"
+        type="text"
+        maxlength="150"
+        placeholder="ใส่ชื่อคนที่ 2">
+
+
+
+    <label>
+        วันที่
+    </label>
+
+    <input
+        id="date"
+        type="date">
+
+
+
+    <button
+        class="create"
+        onclick="createCertificate()">
+
+        🕊️ สร้างใบสมรส
+
+    </button>
+
+
+
+    <button
+        class="clear"
+        onclick="clearData()">
+
+        ล้างข้อมูล
+
+    </button>
+
+
+</div>
+
+
+
+<!-- ==================================================
+        RESULT
+================================================== -->
+
+<div id="result">
+
+
+    <div
+        id="certificate"
+        class="certificate">
+
+
+        <!-- ตกแต่ง -->
+
+        <div class="flower f1">
+            ❧
+        </div>
+
+        <div class="flower f2">
+            ❧
+        </div>
+
+        <div class="flower f3">
+            ❧
+        </div>
+
+        <div class="flower f4">
+            ❧
+        </div>
+
+
+
+        <!-- นก -->
+
+        <div class="bird">
+            🕊️
+        </div>
+
+
+
+        <!-- หัวข้อ -->
+
+        <div class="english">
+            LOVE CERTIFICATE
+        </div>
+
+
+        <div class="main-title">
+            ♡ใบสมรส♡
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="names-title">
+            ใบประกาศแห่งความรักของ
+        </div>
+
+
+
+        <!-- ==================================================
+                ชื่อซ้าย - ขวา
+        ================================================== -->
+
+        <div class="names">
+
+
+            <div class="person">
+
+                <div
+                    id="name1"
+                    class="person-name">
+
+                    ชื่อคนที่ 1
+
+                </div>
+
+            </div>
+
+
+
+            <div class="heart">
+                ♡
+            </div>
+
+
+
+            <div class="person">
+
+                <div
+                    id="name2"
+                    class="person-name">
+
+                    ชื่อคนที่ 2
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ข้อความ -->
+
+        <div class="description">
+
+            ได้ตกลงใช้ชีวิตร่วมกัน<br>
+
+            พร้อมแบ่งปันความสุข รอยยิ้ม
+            และช่วงเวลาดี ๆ ไปด้วยกัน
+
+        </div>
+
+
+
+        <!-- วันที่ -->
+
+        <div class="date">
+
+            วันที่
+
+            <strong id="showDate">
+                -
+            </strong>
+
+        </div>
+
+
+
+        <!-- ไม่มีส่วนชื่อด้านล่างแล้ว -->
+
+
+        <div class="fake">
+
+            เอกสารจำลองเพื่อความบันเทิง
+            • ไม่มีผลทางกฎหมาย
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- บันทึก -->
+
+    <button
+        class="save"
+        onclick="saveImage()">
+
+        📸 บันทึกเป็นรูปภาพ
+
+    </button>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- ==================================================
+        HTML2CANVAS
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+</script>
+
+
+
+<script>
+
+
+/* ==================================================
+        CREATE
+================================================== */
+
+function createCertificate(){
+
+    const name1 =
+        document
+        .getElementById("person1")
+        .value
+        .trim();
+
+
+    const name2 =
+        document
+        .getElementById("person2")
+        .value
+        .trim();
+
+
+    const date =
+        document
+        .getElementById("date")
+        .value;
+
+
+
+    if(!name1 || !name2){
+
+        alert(
+            "กรุณาใส่ชื่อทั้ง 2 คนก่อน ❤️"
+        );
+
+        return;
+    }
+
+
+
+    /* ใส่ชื่อ */
+
+    document
+        .getElementById("name1")
+        .textContent =
+        name1;
+
+
+    document
+        .getElementById("name2")
+        .textContent =
+        name2;
+
+
+
+    /* วันที่ */
+
+    if(date){
+
+        const d =
+            new Date(
+                date + "T00:00:00"
+            );
+
+
+        const formatted =
+            d.toLocaleDateString(
+                "th-TH",
+                {
+                    day:"numeric",
+                    month:"long",
+                    year:"numeric"
+                }
+            );
+
+
+        document
+            .getElementById("showDate")
+            .textContent =
+            formatted;
+
+    }else{
+
+        document
+            .getElementById("showDate")
+            .textContent =
+            "-";
+
+    }
+
+
+
+    /* แสดงผล */
+
+    document
+        .getElementById("result")
+        .style.display =
+        "block";
+
+
+    setTimeout(()=>{
+
+        document
+            .getElementById("result")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+    },100);
+
+}
+
+
+
+/* ==================================================
+        SAVE IMAGE
+================================================== */
+
+function saveImage(){
+
+    const certificate =
+        document
+        .getElementById("certificate");
+
+
+    if(
+        typeof html2canvas ===
+        "undefined"
+    ){
+
+        alert(
+            "กรุณาเปิดอินเทอร์เน็ตก่อนบันทึกภาพ"
+        );
+
+        return;
+    }
+
+
+    html2canvas(
+
+        certificate,
+
+        {
+            scale:3,
+
+            backgroundColor:
+                "#faf3ed",
+
+            useCORS:true
+        }
+
+    )
+    .then(canvas=>{
+
+
+        const name1 =
+            document
+            .getElementById("person1")
+            .value
+            .trim()
+            .replace(
+                /[\\/:*?"<>|]/g,
+                "_"
+            );
+
+
+        const name2 =
+            document
+            .getElementById("person2")
+            .value
+            .trim()
+            .replace(
+                /[\\/:*?"<>|]/g,
+                "_"
+            );
+
+
+        const link =
+            document.createElement("a");
+
+
+        link.download =
+            `ใบสมรส-${name1}-${name2}.png`;
+
+
+        link.href =
+            canvas.toDataURL(
+                "image/png"
+            );
+
+
+        link.click();
+
+    });
+
+}
+
+
+
+/* ==================================================
+        CLEAR
+================================================== */
+
+function clearData(){
+
+    document
+        .getElementById("person1")
+        .value = "";
+
+
+    document
+        .getElementById("person2")
+        .value = "";
+
+
+    document
+        .getElementById("date")
+        .value = "";
+
+
+    document
+        .getElementById("result")
+        .style.display =
+        "none";
+
+}
+
+</script>
+
+</body>
+</html>
